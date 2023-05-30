@@ -40,7 +40,9 @@ function copyItemsToSite(dataDir) {
   app.use(compression());
   app.use(express.static('site'));
 
-  app.listen(port, () => {
+  const server = app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
-  })
+  });
+  server.keepAliveTimeout = 30 * 1000;
+  server.headersTimeout = 35 * 1000;
 })();
